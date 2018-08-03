@@ -21,10 +21,7 @@ namespace SI._01.CreateClass
 			Gender = gender;
 		}
 
-		public override string ToString()
-		{
-			return $"{typeof(Person).Name}; {Name}; {BirthDate.Year}-{BirthDate.Month}-{BirthDate.Day}; {Gender}";
-		}
+		public override string ToString() => $"{typeof(Person).Name}; {Name}; {BirthDate.Year}-{BirthDate.Month}-{BirthDate.Day}; {Gender}";
 
 		private static void Main()
 		{
