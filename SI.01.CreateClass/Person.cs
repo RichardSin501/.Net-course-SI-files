@@ -1,14 +1,8 @@
 ﻿using System;
-using static System.Console;
 
 namespace SI._01.CreateClass
 {
-	public enum Gender
-	{
-		Male, Female
-	}
-
-	internal class Person
+	public class Person
 	{
 		public string Name { get; set; }
 		public DateTime BirthDate { get; }
@@ -21,13 +15,6 @@ namespace SI._01.CreateClass
 			Gender = gender;
 		}
 
-		public override string ToString() => $"{typeof(Person).Name}; {Name}; {BirthDate.Year}-{BirthDate.Month}-{BirthDate.Day}; {Gender}";
-
-		private static void Main()
-		{
-			var person = new Person("Jenő", new DateTime(1990, 01, 01), Gender.Male);
-			WriteLine(person);
-			ReadKey();
-		}
+		public override string ToString() => $"{this.GetType().Name}; Name: {Name}; Birth: {BirthDate.Year}-{BirthDate.Month}-{BirthDate.Day}; Gender: {Gender};";
 	}
 }
