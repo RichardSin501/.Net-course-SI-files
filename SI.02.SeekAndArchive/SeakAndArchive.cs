@@ -1,7 +1,10 @@
-﻿using System;
+﻿// <copyright file="SeakAndArchive.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 
 namespace SI._02.SeekAndArchive
 {
@@ -10,6 +13,7 @@ namespace SI._02.SeekAndArchive
         private readonly string _dirPath;
         private readonly string _searchPattern;
         private readonly DirectoryInfo _workingDir;
+        private int _eventCounter = 0;
 
         public SeakAndArchive(string searchedFileName, string dirPath)
         {
@@ -18,51 +22,70 @@ namespace SI._02.SeekAndArchive
             _workingDir = new DirectoryInfo(_dirPath);
         }
 
-        private void AddFileSystemWatcher()
+        public void ListFiles()
         {
-            if (_workingDir.Exists)
+            var searchedFilesInDirAndSubdirs = new List<FileInfo>(_workingDir.GetFiles(_searchPattern, SearchOption.AllDirectories));
+            DrawLine();
+            Console.WriteLine("Watched files:");
+            foreach (var file in searchedFilesInDirAndSubdirs)
             {
-                FileSystemWatcher workingDirWatcher = new FileSystemWatcher(_dirPath, _searchPattern)
-                {
-                    NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName
-                };
-                workingDirWatcher.IncludeSubdirectories = true;
-                workingDirWatcher.Changed += _workingDirWatcher_EventHandler;
-                workingDirWatcher.Created += _workingDirWatcher_EventHandler;
-                workingDirWatcher.Renamed += _workingDirWatcher_EventHandler;
-                workingDirWatcher.Deleted += _workingDirWatcher_EventHandler;
-                workingDirWatcher.EnableRaisingEvents = true;
+                Console.WriteLine(file.DirectoryName + @"\" + file.Name);
             }
-            else
-            {
-                throw new FileNotFoundException("Directory not found.");
-            }
-        }
-
-        private void _workingDirWatcher_EventHandler(object sender, FileSystemEventArgs e)
-        {
-            Console.WriteLine("Change happened in the working directory.");
+            DrawLine();
         }
 
         public void Run()
         {
             try
             {
-                AddFileSystemWatcher();
-
-                Console.WriteLine("Press ESC to quit the program.");
-                while (true)
+                if (_workingDir.Exists)
                 {
-                    Thread.Sleep(1000);
+                    ListFiles();
+                    AddFileSystemWatcher();
 
-                    if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape) break;
+                    Console.WriteLine("Press ESC to quit the program.");
+                    DrawLine();
+                    while (true)
+                    {
+                        if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Escape) break;
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
+                else
+                {
+                    throw new FileNotFoundException("Directory not found.");
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine("The process failed: {0}, {1}", e.ToString(), e.Message);
+                Console.WriteLine($"The process failed: {e.ToString()},\n {e.Message}");
             }
+        }
+
+        private void AddFileSystemWatcher()
+        {
+            FileSystemWatcher workingDirWatcher = new FileSystemWatcher(_dirPath, _searchPattern)
+            {
+                NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName
+            };
+            workingDirWatcher.IncludeSubdirectories = true;
+            workingDirWatcher.Changed += WorkingDirWatcher_EventHandler;
+            workingDirWatcher.Created += WorkingDirWatcher_EventHandler;
+            workingDirWatcher.Renamed += WorkingDirWatcher_EventHandler;
+            workingDirWatcher.Deleted += WorkingDirWatcher_EventHandler;
+            workingDirWatcher.EnableRaisingEvents = true;
+        }
+
+        private void WorkingDirWatcher_EventHandler(object sender, FileSystemEventArgs e)
+        {
+            Console.WriteLine($"({++_eventCounter}.) {e.FullPath} {e.ChangeType.ToString().ToLower()}");
+            ListFiles();
+            Backup.BackupFile(Path.Combine(_workingDir.Parent.FullName + @"\Backups"), e.Name, e.FullPath);
+        }
+
+        private static void DrawLine()
+        {
+            Console.WriteLine("--------------------------------");
         }
 
         private static void Main(string[] args)
