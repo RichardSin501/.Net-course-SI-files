@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B7B08F33-4655-4D4E-A117-FD47D16BFABB}</ProjectGuid>
+    <ProjectGuid>{17E8E09D-DAD8-433B-8E6C-1CCDEE7832F8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SI._01.CreateClass</RootNamespace>
-    <AssemblyName>SI.01.CreateClass</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>SequentialCollections</RootNamespace>
+    <AssemblyName>SequentialCollections</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -42,12 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Gender.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="MainClass.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Room.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

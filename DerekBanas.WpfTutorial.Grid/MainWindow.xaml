@@ -1,0 +1,71 @@
+﻿<Window x:Class="DerekBanas.WpfTutorial.Grid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DerekBanas.WpfTutorial.Grid"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Hello WPF" Height="350" Width="525" ResizeMode="CanResize" SizeToContent="WidthAndHeight" Topmost="False" WindowState="Normal"
+        MouseMove="Window_MouseMove">
+
+    <!-- You can store data as a resource and reuse it by adding this
+    xmlns:sys="clr-namespace:System;assembly=mscorlib" -->
+    <Window.Resources>
+        <sys:String x:Key="strHelloAgain">Hello Again</sys:String>
+
+        <!-- You can define default styling of
+        components -->
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="1" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Consolas" />
+        </Style>
+    </Window.Resources>
+    <!-- A Grid Panels are very flexible because
+    everything is placed in a cell in columns
+    and rows
+    You add rows and columns by adding RowDefinitions
+    and ColumnDefinitions that have heights that
+    are fixed, Auto (Takes space needed by component),
+    or * (Takes space available)-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <!-- Define where component starts and the
+        number of columns it spans -->
+        <TextBox Grid.Row="0" Grid.Column="0" Margin="2,5" Grid.ColumnSpan="4" />
+        <Button Content="7" Grid.Row="1" Grid.Column="0" />
+        <Button Content="8" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="9" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="+" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="131" Height="51" />
+
+        <Button Content="4" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="5" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="6" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="-" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Width="131" Height="51" />
+
+        <Button Content="1" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="2" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="3" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="*" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Width="131" Height="51" />
+
+        <Button Content="C" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="0" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="=" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="131" Height="51" />
+        <Button Content="/" Grid.Column="3" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="131" Height="51" />
+    </Grid>
+</Window>

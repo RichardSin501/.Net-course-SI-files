@@ -1,0 +1,26 @@
+﻿<Window x:Class="DerekBanas.WpfTutorial.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DerekBanas.WpfTutorial"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="800" Height="480" ResizeMode="CanResize" SizeToContent="WidthAndHeight" Topmost="False" WindowState="Normal"  MouseMove="MainWindow_OnMouseMove" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <system:String x:Key="strHelloAgain">Hello again</system:String>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="1"></Setter>
+            <Setter Property="FontSize" Value="40"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontFamily" Value="Consolas"></Setter>
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical">
+        <Label x:Name="Helloka" HorizontalAlignment="Center" VerticalAlignment="Top"  Content="Hellóka" FontSize="40" MouseLeftButtonDown="Helloka_MouseLeftButtonDown" />
+        <Label FontSize="40" HorizontalAlignment="Center" Content="{StaticResource strHelloAgain}" MouseLeftButtonDown="Helloka_MouseLeftButtonDown" />
+        <Button x:Name="Button1" Height="60" Width="300" HorizontalAlignment="Center" Content="Close Window" Click="Button1_OnClick" Margin="1,20,1,1" />
+        <Button x:Name="ButtonOpenFile" Height="60" Width="300" HorizontalAlignment="Center" Content="Open File" Click="ButtonOpenFile_OnClick" Margin="1,20,1,1" />
+        <Button x:Name="ButtonSaveFile" Height="60" Width="300" HorizontalAlignment="Center" Content="Save File" Click="ButtonSaveFile_OnClick" Padding="1" Margin="1,20,1,1" />
+    </StackPanel>
+</Window>
